@@ -39,23 +39,19 @@ public final class NewsPreferences {
                 context.getString(R.string.settings_order_by_key),
                 context.getString(R.string.settings_order_by_default));
 
-        // Get the orderDate information from SharedPreferences and check for the value associated with the key
         String orderDate = sharedPrefs.getString(
                 context.getString(R.string.settings_order_date_key),
                 context.getString(R.string.settings_order_date_default));
 
-        // Get the fromDate information from SharedPreferences and check for the value associated with the key
         String fromDate = sharedPrefs.getString(
                 context.getString(R.string.settings_from_date_key),
                 context.getString(R.string.settings_from_date_default));
 
-        // Parse breaks apart the URI string that is passed into its parameter
         Uri baseUri = Uri.parse(Constants.NEWS_REQUEST_URL);
 
-        // buildUpon prepares the baseUri that we just parsed so we can add query parameters to it
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
-        // Append query parameter and its value. (e.g. the 'show-tag=contributor')
+
         uriBuilder.appendQueryParameter(QUERY_PARAM, "");
         uriBuilder.appendQueryParameter(ORDER_BY_PARAM, orderBy);
         uriBuilder.appendQueryParameter(PAGE_SIZE_PARAM, numOfItems);

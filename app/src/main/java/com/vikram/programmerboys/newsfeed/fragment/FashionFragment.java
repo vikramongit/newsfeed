@@ -1,4 +1,3 @@
-
 package com.vikram.programmerboys.newsfeed.fragment;
 
 import android.os.Bundle;
@@ -24,7 +23,6 @@ public class FashionFragment extends BaseArticlesFragment {
         String fashionUrl = NewsPreferences.getPreferredUrl(getContext(), getString(R.string.fashion));
         Log.e(LOG_TAG, fashionUrl);
 
-        // Create a new loader for the given URL
         return new NewsLoader(getActivity(), fashionUrl);
     }
 }

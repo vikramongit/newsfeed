@@ -25,7 +25,7 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> {
 
     @Override
     protected void onStartLoading() {
-        // Trigger the loadInBackground() method to execute.
+
         forceLoad();
     }
 
@@ -36,7 +36,7 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> {
             return null;
         }
 
-        // Perform the network request, parse the response, and extract a list of news.
+
         List<News> newsData = QueryUtils.fetchNewsData(mUrl);
         return newsData;
     }

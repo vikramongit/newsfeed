@@ -1,27 +1,3 @@
-/*
- * MIT License
- *
- * Copyright (c) 2018 Soojeong Shin
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-
 package com.vikram.programmerboys.newsfeed.adapter;
 
 import android.content.Context;
@@ -104,18 +80,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
 
-        // Change the color theme of Title TextView by using the user's stored preferences
         setColorTheme(holder);
 
-        // Change text size of TextView by using the user's stored preferences
         setTextSize(holder);
 
-        // Find the current news that was clicked on
         final News currentNews = mNewsList.get(position);
 
         holder.titleTextView.setText(currentNews.getTitle());
         holder.sectionTextView.setText(currentNews.getSection());
-        // If the author does not exist, hide the authorTextView
         if (currentNews.getAuthor() == null) {
             holder.authorTextView.setVisibility(View.GONE);
         } else {
@@ -123,26 +95,19 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             holder.authorTextView.setText(currentNews.getAuthor());
         }
 
-        // Get time difference between the current date and web publication date and
-        // set the time difference on the textView
         holder.dateTextView.setText(getTimeDifference(formatDate(currentNews.getDate())));
 
-        // Get string of the trailTextHTML and convert Html text to plain text
-        // and set the plain text on the textView
         String trailTextHTML = currentNews.getTrailTextHtml();
         holder.trailTextView.setText(Html.fromHtml(Html.fromHtml(trailTextHTML).toString()));
 
-        // Set an OnClickListener to open a website with more information about the selected article
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Convert the String URL into a URI object (to pass into the Intent constructor)
+
                 Uri newsUri = Uri.parse(currentNews.getUrl());
 
-                // Create a new intent to view the news URI
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, newsUri);
 
-                // Send the intent to launch a new activity
                 mContext.startActivity(websiteIntent);
             }
         });
@@ -156,7 +121,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                     .load(currentNews.getThumbnail())
                     .into(holder.thumbnailImageView);
         }
-        // Set an OnClickListener to share the data with friends via email or  social networking
+
         holder.shareImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -167,7 +132,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
 
     private void setColorTheme(ViewHolder holder) {
-        // Get the color theme string from SharedPreferences and check for the value associated with the key
+
         String colorTheme = sharedPrefs.getString(
                 mContext.getString(R.string.settings_color_key),
                 mContext.getString(R.string.settings_color_default));
@@ -196,7 +161,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
 
     private void setTextSize(ViewHolder holder) {
-        // Get the text size string from SharedPreferences and check for the value associated with the key
+
         String textSize = sharedPrefs.getString(
                 mContext.getString(R.string.settings_text_size_key),
                 mContext.getString(R.string.settings_text_size_default));
@@ -270,11 +235,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        // Initialize a SimpleDateFormat instance and configure it to provide a more readable
-        // representation according to the given format, but still in UTC
+
         SimpleDateFormat df = new SimpleDateFormat("MMM d, yyyy  h:mm a", Locale.ENGLISH);
         String formattedDateUTC = df.format(dateObject);
-        // Convert UTC into Local time
+
         df.setTimeZone(TimeZone.getTimeZone("UTC"));
         Date date = null;
         try {

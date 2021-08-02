@@ -1,5 +1,3 @@
-
-
 package com.vikram.programmerboys.newsfeed.fragment;
 
 import android.os.Bundle;

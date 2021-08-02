@@ -25,7 +25,7 @@ public class Constants {
     static final int READ_TIMEOUT = 10000;
 
 
-    static final int CONNECT_TIMEOUT = 15000; /* milliseconds */
+    static final int CONNECT_TIMEOUT = 15000;
 
 
     static final int SUCCESS_RESPONSE_CODE = 200;

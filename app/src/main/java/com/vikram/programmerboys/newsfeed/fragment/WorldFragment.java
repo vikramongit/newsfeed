@@ -1,5 +1,3 @@
-
-
 package com.vikram.programmerboys.newsfeed.fragment;
 
 import android.os.Bundle;
@@ -25,7 +23,6 @@ public class WorldFragment extends BaseArticlesFragment {
         String worldUrl = NewsPreferences.getPreferredUrl(getContext(), getString(R.string.world));
         Log.e(LOG_TAG, worldUrl);
 
-        // Create a new loader for the given URL
         return new NewsLoader(getActivity(), worldUrl);
     }
 }

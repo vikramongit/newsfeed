@@ -1,5 +1,3 @@
-
-
 package com.vikram.programmerboys.newsfeed.fragment;
 
 import android.os.Bundle;
@@ -24,8 +22,6 @@ public class EnvironmentFragment extends BaseArticlesFragment {
     public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
         String environmentUrl = NewsPreferences.getPreferredUrl(getContext(), getString(R.string.environment));
         Log.e(LOG_TAG, environmentUrl);
-
-        // Create a new loader for the given URL
         return new NewsLoader(getActivity(), environmentUrl);
     }
 }
